@@ -2,7 +2,7 @@ import GalleryItem from './galleryItem';
 
 const items = Array.from({ length: 25 }, (_, i) => ({
     id: i + 1,
-    media: `/pins/pin${i + 1}.jpeg`,
+    media: `Pinterest/pins/pin${i + 1}.jpeg`,
     width: 1260,
     height: [1400, 1260, 1880, 1000][Math.floor(Math.random() * 4)],
 }));

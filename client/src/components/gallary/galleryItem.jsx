@@ -1,15 +1,20 @@
 import { Link } from 'react-router';
+import ImageKit from '../share/image-custom';
 
-export default function GalleryItem({ id, media, height }) {
+export default function GalleryItem({ id, media, width, height }) {
+    const optimizedHeight = (372 * height) / width;
+
     return (
         <div
             className='relative flex group'
             style={{ gridRowEnd: `span ${Math.ceil(height / 100)}` }}
         >
-            <img
+            <ImageKit
                 src={media}
                 alt={`Gallery item ${id}`}
                 className='w-full object-cover rounded-2xl cursor-pointer'
+                width={372}
+                height={optimizedHeight}
             />
             <Link
                 to={`/pin/${id}`}
