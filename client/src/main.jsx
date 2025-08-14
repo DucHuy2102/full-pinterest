@@ -16,9 +16,9 @@ createRoot(document.getElementById('root')).render(
             <Routes>
                 <Route element={<DefaultLayout />}>
                     <Route path='/' element={<HomePage />} />
-                    <Route path='/create' element={<CreatePage />} />
                     <Route path='/pin/:id' element={<PostPage />} />
                     <Route path='/search' element={<SearchPage />} />
+                    <Route path='/create' element={<CreatePage />} />
                     <Route path='/:username' element={<ProfilePage />} />
                 </Route>
                 <Route path='/auth' element={<AuthPage />} />

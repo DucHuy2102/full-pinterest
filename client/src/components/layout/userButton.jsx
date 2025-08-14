@@ -30,7 +30,7 @@ const UserLoggedIn = () => {
 
     const handleToggleMenu = (event) => {
         event.stopPropagation();
-        setOpenUserMenu(!openUserMenu);
+        setOpenUserMenu((prev) => !prev);
     };
 
     return (

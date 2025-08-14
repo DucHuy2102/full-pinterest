@@ -8,7 +8,7 @@ import {
 } from 'react-icons/bs';
 import { GoHome, GoHomeFill } from 'react-icons/go';
 import { IoSettings, IoSettingsOutline } from 'react-icons/io5';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ImageKit from '../share/image-custom';
 
 const menuItems = [
@@ -70,7 +70,7 @@ const MenuItem = ({ id, icon, link, pathname }) => {
             href={link}
             key={id}
             className='w-12 h-12 hover:bg-[#f1f1f1] rounded-md
-    flex items-center justify-center'
+            flex items-center justify-center'
         >
             {isActive ? icon.active : icon.inactive}
         </a>
@@ -82,15 +82,18 @@ export default function LeftBar() {
 
     return (
         <div
-            className='h-screen bg-white w-[72px] flex flex-col justify-between items-center 
-        sticky top-0 left-0 z-20 py-4 border-r-[1px] border-[#e9e9e9]'
+            className='h-screen bg-white w-[72px] hidden sm:flex flex-col justify-between items-center 
+            sticky top-0 left-0 z-20 py-4 border-r-[1px] border-[#e9e9e9]'
         >
             <div className='flex flex-col items-center gap-6'>
-                <ImageKit
-                    src='Pinterest/general/logo.png'
-                    alt='Logo'
-                    className='w-[26px] h-[26px] xl:w-[28px] xl:h-[28px] mt-2'
-                />
+                <Link to={'/'}>
+                    <ImageKit
+                        src='Pinterest/general/logo.png'
+                        alt='Logo'
+                        className='w-[25px] h-[25px] sm:w-[26px] sm:h-[26px] lg:w-[27px] lg:h-[27px] 
+                        xl:w-[28px] xl:h-[28px] 2xl:w-[29px] 2xl:h-[29px] mt-2'
+                    />
+                </Link>
                 <div className='flex flex-col items-center gap-6'>
                     {menuItems.slice(0, 4).map((item) => (
                         <MenuItem key={item.id} {...item} pathname={pathname} />
