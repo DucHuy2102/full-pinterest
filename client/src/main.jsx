@@ -9,6 +9,7 @@ import DefaultLayout from './pages/layout.jsx';
 import PostPage from './pages/postPage.jsx';
 import ProfilePage from './pages/profilePage.jsx';
 import SearchPage from './pages/searchPage.jsx';
+import Settings from './pages/settings.jsx';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path='/pin/:id' element={<PostPage />} />
                     <Route path='/search' element={<SearchPage />} />
                     <Route path='/create' element={<CreatePage />} />
+                    <Route path='/settings' element={<Settings />} />
                     <Route path='/:username' element={<ProfilePage />} />
                 </Route>
                 <Route path='/auth' element={<AuthPage />} />

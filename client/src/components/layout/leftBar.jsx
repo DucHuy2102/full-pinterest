@@ -34,7 +34,7 @@ const menuItems = [
             active: <BsBellFill className='text-2xl' />,
             inactive: <BsBell className='text-2xl text-black' />,
         },
-        link: '/',
+        link: '/notifications',
     },
     {
         id: 4,
@@ -42,15 +42,7 @@ const menuItems = [
             active: <BsChatDotsFill className='text-2xl' />,
             inactive: <BsChatDots className='text-2xl text-black' />,
         },
-        link: '/',
-    },
-    {
-        id: 4,
-        icon: {
-            active: <BsChatDotsFill className='text-2xl' />,
-            inactive: <BsChatDots className='text-2xl text-black' />,
-        },
-        link: '/',
+        link: '/chats',
     },
     {
         id: 5,
@@ -58,7 +50,7 @@ const menuItems = [
             active: <IoSettings className='text-2xl' />,
             inactive: <IoSettingsOutline className='text-2xl text-black' />,
         },
-        link: '/',
+        link: '/settings',
     },
 ];
 
@@ -66,14 +58,14 @@ const MenuItem = ({ id, icon, link, pathname }) => {
     const isActive = pathname === link;
 
     return (
-        <a
-            href={link}
+        <Link
             key={id}
+            to={link}
             className='w-12 h-12 hover:bg-[#f1f1f1] rounded-md
             flex items-center justify-center'
         >
             {isActive ? icon.active : icon.inactive}
-        </a>
+        </Link>
     );
 };
 

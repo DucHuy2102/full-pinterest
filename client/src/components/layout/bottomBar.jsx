@@ -9,8 +9,6 @@ import {
 import { GoHome, GoHomeFill } from 'react-icons/go';
 import { IoSettings, IoSettingsOutline } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
-import { FaRegUser } from 'react-icons/fa6';
-import { FaUser } from 'react-icons/fa6';
 
 const menuItems = [
     {
@@ -35,7 +33,7 @@ const menuItems = [
             active: <BsBellFill className='text-xl' />,
             inactive: <BsBell className='text-xl text-black' />,
         },
-        link: '/',
+        link: '/notifications',
     },
     {
         id: 4,
@@ -43,15 +41,7 @@ const menuItems = [
             active: <BsChatDotsFill className='text-xl' />,
             inactive: <BsChatDots className='text-xl text-black' />,
         },
-        link: '/',
-    },
-    {
-        id: 4,
-        icon: {
-            active: <FaUser className='text-xl' />,
-            inactive: <FaRegUser className='text-xl text-black' />,
-        },
-        link: '/',
+        link: '/chats',
     },
     {
         id: 5,
@@ -59,7 +49,7 @@ const menuItems = [
             active: <IoSettings className='text-xl' />,
             inactive: <IoSettingsOutline className='text-xl text-black' />,
         },
-        link: '/',
+        link: '/settings',
     },
 ];
 
