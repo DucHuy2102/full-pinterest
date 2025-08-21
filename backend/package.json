@@ -1,0 +1,13 @@
+{
+    "type": "module",
+    "name": "backend-pinterest",
+    "main": "index.js",
+    "dependencies": {
+        "body-parser": "^2.2.0",
+        "express": "^5.1.0",
+        "mongoose": "^8.17.2"
+    },
+    "scripts": {
+        "dev": "node --watch --env-file=.env index.js"
+    }
+}
