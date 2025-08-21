@@ -9,7 +9,7 @@ import {
 import { GoHome, GoHomeFill } from 'react-icons/go';
 import { IoSettings, IoSettingsOutline } from 'react-icons/io5';
 import { Link, useLocation } from 'react-router-dom';
-import ImageKit from '../share/image-custom';
+import ImageKit from '../../share/image-custom';
 
 const menuItems = [
     {

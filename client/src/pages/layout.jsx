@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router';
-import LeftBar from '../components/layout/leftBar';
-import TopBar from '../components/layout/topBar';
-import BottomBar from '../components/layout/bottomBar';
+import LeftBar from '../components/layout/logged-in/leftBar';
+import TopBar from '../components/layout/logged-in/topBar';
+import BottomBar from '../components/layout/logged-in/bottomBar';
+import NotLoggedInPage from './not-logged-in/homePage';
 
-export default function DefaultLayout() {
+const LoginSuccess = () => {
     return (
         <div className='min-h-screen w-full flex flex-col sm:flex-row gap-4'>
             <LeftBar />
@@ -16,4 +17,10 @@ export default function DefaultLayout() {
             <BottomBar />
         </div>
     );
+};
+
+export default function DefaultLayout() {
+    const isUserLoggedIn = true;
+
+    return <>{isUserLoggedIn ? <LoginSuccess /> : <NotLoggedInPage />}</>;
 }

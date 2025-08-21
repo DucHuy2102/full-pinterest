@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { IoCheckmark } from 'react-icons/io5';
-import ImageKit from '../share/image-custom';
+import ImageKit from '../../share/image-custom';
 
 const MenuUser = forwardRef((_, ref) => {
     return (

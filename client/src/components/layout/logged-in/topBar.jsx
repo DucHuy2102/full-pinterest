@@ -1,7 +1,7 @@
 import { CiSearch } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
 import UserButton from './userButton';
-import ImageKit from '../share/image-custom';
+import ImageKit from '../../share/image-custom';
 
 export default function TopBar() {
     return (
