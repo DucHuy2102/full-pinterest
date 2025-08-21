@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router';
-import LeftBar from '../components/layout/logged-in/leftBar';
-import TopBar from '../components/layout/logged-in/topBar';
-import BottomBar from '../components/layout/logged-in/bottomBar';
-import NotLoggedInPage from './not-logged-in/homePage';
+import LeftBar from './components/layout/logged-in/leftBar';
+import TopBar from './components/layout/logged-in/topBar';
+import BottomBar from './components/layout/logged-in/bottomBar';
+import NotLoggedInPage from './pages/not-logged-in/homePage';
 
 const LoginSuccess = () => {
     return (
@@ -20,7 +20,7 @@ const LoginSuccess = () => {
 };
 
 export default function DefaultLayout() {
-    const isUserLoggedIn = true;
+    const isUserLoggedIn = false;
 
     return <>{isUserLoggedIn ? <LoginSuccess /> : <NotLoggedInPage />}</>;
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdArrowBack } from 'react-icons/io';
-import Gallary from '../components/gallary/gallery';
-import Comments from '../components/comments/comments';
-import ImageKit from '../components/share/image-custom';
-import Interactions from '../components/comments/interactions';
+import Gallary from '../../components/gallary/gallery';
+import Comments from '../../components/comments/comments';
+import ImageKit from '../../components/share/image-custom';
+import Interactions from '../../components/comments/interactions';
 import { FaArrowUp } from 'react-icons/fa';
 
 export default function PostPage() {

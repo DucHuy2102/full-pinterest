@@ -1,4 +1,4 @@
-import ImageKit from '../components/share/image-custom';
+import ImageKit from '../../components/share/image-custom';
 
 export default function AuthPage() {
     return (

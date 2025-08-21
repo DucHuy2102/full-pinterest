@@ -1,10 +1,10 @@
 import { LuUpload } from 'react-icons/lu';
-import ImageKit from '../components/share/image-custom';
+import ImageKit from '../../components/share/image-custom';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { LuDot } from 'react-icons/lu';
 import { useState } from 'react';
-import Gallery from '../components/gallary/gallery';
-import Collections from '../components/profile/collections';
+import Gallery from '../../components/gallary/gallery';
+import Collections from '../../components/profile/collections';
 
 export default function ProfilePage() {
     const [chosenTab, setChosenTab] = useState('created');

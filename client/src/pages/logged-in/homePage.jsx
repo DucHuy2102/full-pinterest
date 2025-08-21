@@ -1,4 +1,4 @@
-import Gallery from '../components/gallary/gallery';
+import Gallery from '../../components/gallary/gallery';
 
 export default function HomePage() {
     return (

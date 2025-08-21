@@ -2,14 +2,15 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import './index.css';
-import AuthPage from './pages/authPage.jsx';
-import CreatePage from './pages/createPage.jsx';
-import HomePage from './pages/homePage.jsx';
-import DefaultLayout from './pages/layout.jsx';
-import PostPage from './pages/postPage.jsx';
-import ProfilePage from './pages/profilePage.jsx';
-import SearchPage from './pages/searchPage.jsx';
-import Settings from './pages/settings.jsx';
+import AuthPage from './pages/logged-in/authPage.jsx';
+import CreatePage from './pages/logged-in/createPage.jsx';
+import HomePage from './pages/logged-in/homePage.jsx';
+import DefaultLayout from './layout.jsx';
+import PostPage from './pages/logged-in/postPage.jsx';
+import ProfilePage from './pages/logged-in/profilePage.jsx';
+import SearchPage from './pages/logged-in/searchPage.jsx';
+import Settings from './pages/logged-in/settings.jsx';
+import ResetPassword from './pages/not-logged-in/reset-password.jsx';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path='/:username' element={<ProfilePage />} />
                 </Route>
                 <Route path='/auth' element={<AuthPage />} />
+                <Route path='/reset-password/:token' element={<ResetPassword />} />
             </Routes>
         </BrowserRouter>
     </StrictMode>
