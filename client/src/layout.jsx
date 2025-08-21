@@ -20,7 +20,7 @@ const LoginSuccess = () => {
 };
 
 export default function DefaultLayout() {
-    const isUserLoggedIn = false;
+    const isUserLoggedIn = true;
 
     return <>{isUserLoggedIn ? <LoginSuccess /> : <NotLoggedInPage />}</>;
 }
