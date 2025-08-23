@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import ImageKit from '../share/image-custom';
 
-export default function GalleryItem({ id, media, width, height }) {
+export default function GalleryItem({ _id, image, width, height }) {
     const optimizedHeight = (372 * height) / width;
 
     return (
@@ -10,14 +10,14 @@ export default function GalleryItem({ id, media, width, height }) {
             style={{ gridRowEnd: `span ${Math.ceil(height / 100)}` }}
         >
             <ImageKit
-                src={media}
-                alt={`Gallery item ${id}`}
+                src={image}
+                alt={`Gallery item ${_id}`}
                 className='w-full object-cover rounded-2xl cursor-pointer'
                 width={372}
                 height={optimizedHeight}
             />
             <Link
-                to={`/pin/${id}`}
+                to={`/pin/${_id}`}
                 className='hidden absolute w-full h-full top-0 left-0 bg-gray-500/30 opacity-50 
                 rounded-2xl group-hover:flex items-center justify-center'
             />

@@ -1,21 +1,60 @@
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import GalleryItem from './galleryItem';
+import axios from 'axios';
 
-const items = Array.from({ length: 25 }, (_, i) => ({
-    id: i + 1,
-    media: `Pinterest/pins/pin${i + 1}.jpeg`,
-    width: 1260,
-    height: [1400, 1260, 1880, 1000][Math.floor(Math.random() * 4)],
-}));
+const fetchPins = async (pageParam) => {
+    const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/pins?cursor=${pageParam}`);
+    return res.data;
+};
 
 export default function Gallery() {
+    const { data, status, fetchNextPage, hasNextPage } = useInfiniteQuery({
+        queryKey: ['pins'],
+        queryFn: fetchPins,
+        initialPageParam: 0,
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+    });
+
+    if (status === 'loading')
+        return (
+            <p className='text-center text-xl font-semibold italic text-zinc-600'>
+                Please wait, loading pins...
+            </p>
+        );
+    if (status === 'error')
+        return (
+            <p className='text-center text-xl font-bold text-red-500'>
+                Something went wrong! Please try again later.
+            </p>
+        );
+
+    const allPins = data?.pages.flatMap((page) => page.pins) || [];
+
     return (
-        <div
-            className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
-            2xl:grid-cols-6 3xl:grid-cols-7 auto-rows-[10px] gap-4'
+        <InfiniteScroll
+            dataLength={allPins.length}
+            next={fetchNextPage}
+            hasMore={hasNextPage}
+            loader={
+                <p className='text-center text-xl font-semibold text-zinc-600 my-3 italic'>
+                    Loading more pins...
+                </p>
+            }
+            endMessage={
+                <p className='text-center text-xl font-semibold text-teal-700 my-3'>
+                    Yay! You have seen it all
+                </p>
+            }
         >
-            {items.map((item) => (
-                <GalleryItem key={item.id} {...item} />
-            ))}
-        </div>
+            <div
+                className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
+                2xl:grid-cols-6 3xl:grid-cols-7 auto-rows-[10px] gap-4'
+            >
+                {allPins.map((item, index) => (
+                    <GalleryItem key={index} {...item} />
+                ))}
+            </div>
+        </InfiniteScroll>
     );
 }

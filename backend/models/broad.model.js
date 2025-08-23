@@ -8,6 +8,6 @@ const broadSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Broad = mongoose.model('Broad', broadSchema);
+const BroadModel = mongoose.model('Broad', broadSchema);
 
-export default Broad;
+export default BroadModel;

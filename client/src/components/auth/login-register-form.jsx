@@ -11,7 +11,7 @@ export default function LoginRegisterForm({
         <form className='flex flex-col items-start justify-center gap-3'>
             {state === 'REGISTER' && (
                 <div className='flex flex-col gap-1 w-full'>
-                    <label htmlFor='email' className='cursor-pointer pl-2'>
+                    <label htmlFor='username' className='cursor-pointer pl-2'>
                         Username
                     </label>
                     <input
