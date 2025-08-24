@@ -41,7 +41,7 @@ const menuItems = [
             active: <BsChatDotsFill className='text-xl' />,
             inactive: <BsChatDots className='text-xl text-black' />,
         },
-        link: '/chats',
+        link: '/chat',
     },
     {
         id: 5,

@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+    getUserByUsername,
     verifyEmail,
     forgotPassword,
     resetPassword,
@@ -27,5 +28,8 @@ router.post('/reset-password', resetPassword);
 
 // endpoint for verify email: https://localhost:5000/users/verify-email
 router.get('/verify-email', verifyEmail);
+
+// get user by username - endpoint: https://localhost:5000/users/:username
+router.get('/:username', getUserByUsername);
 
 export default router;

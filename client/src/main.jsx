@@ -11,6 +11,8 @@ import ProfilePage from './pages/logged-in/profilePage.jsx';
 import SearchPage from './pages/logged-in/searchPage.jsx';
 import Settings from './pages/logged-in/settings.jsx';
 import ResetPassword from './pages/not-logged-in/reset-password.jsx';
+import NotificationPage from './pages/logged-in/notificationPage.jsx';
+import ChatPage from './pages/logged-in/chatPage.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ createRoot(document.getElementById('root')).render(
                         <Route path='/search' element={<SearchPage />} />
                         <Route path='/create' element={<CreatePage />} />
                         <Route path='/settings' element={<Settings />} />
+                        <Route path='/notifications' element={<NotificationPage />} />
+                        <Route path='/chat' element={<ChatPage />} />
                         <Route path='/:username' element={<ProfilePage />} />
                     </Route>
                     <Route path='/auth' element={<AuthPage />} />

@@ -8,7 +8,6 @@ import { IoSendOutline } from 'react-icons/io5';
 export default function CommentForm() {
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [commentImage, setCommentImage] = useState(null);
-    console.log({ commentImage });
     const [previewImage, setPreviewImage] = useState(null);
     const [newComment, setNewComment] = useState('');
     const [toggler, setToggler] = useState(false);

@@ -1,7 +1,7 @@
-import { CiSearch } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
 import UserButton from './userButton';
 import ImageKit from '../../share/image-custom';
+import SearchBar from './searchBar';
 
 export default function TopBar() {
     return (
@@ -14,15 +14,7 @@ export default function TopBar() {
             </Link>
 
             {/* search */}
-            <div className='flex flex-1 items-center gap-2 bg-[#f1f1f1] px-3 h-8 sm:px-6 sm:h-12 rounded-[16px]'>
-                <CiSearch className='text-lg sm:text-xl text-black font-bold' />
-                <input
-                    type='text'
-                    placeholder='Search...'
-                    className='bg-transparent border-none outline-none 
-                    text-[16px] sm:text-lg text-zinc-700 flex-1'
-                />
-            </div>
+            <SearchBar />
 
             {/* user */}
             <UserButton />

@@ -8,6 +8,6 @@ const broadSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const BroadModel = mongoose.model('Broad', broadSchema);
+const BoardModel = mongoose.model('Broad', broadSchema);
 
-export default BroadModel;
+export default BoardModel;

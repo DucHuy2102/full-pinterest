@@ -3,14 +3,23 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import GalleryItem from './galleryItem';
 import axios from 'axios';
 
-const fetchPins = async (pageParam) => {
-    const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/pins?cursor=${pageParam}`);
+const fetchPins = async ({ pageParam = 0, queryKey }) => {
+    const [, search, userId, boardId] = queryKey;
+    const searchParam = search?.trim() || '';
+    const userIdParam = userId?.trim() || '';
+    const boardIdParam = boardId?.trim() || '';
+
+    const res = await axios.get(
+        `${
+            import.meta.env.VITE_API_ENDPOINT
+        }/pins?cursor=${pageParam}&search=${searchParam}&userId=${userIdParam}&boardId=${boardIdParam}`
+    );
     return res.data;
 };
 
-export default function Gallery() {
+export default function Gallery({ search, userId, boardId }) {
     const { data, status, fetchNextPage, hasNextPage } = useInfiniteQuery({
-        queryKey: ['pins'],
+        queryKey: ['pins', search, userId, boardId],
         queryFn: fetchPins,
         initialPageParam: 0,
         getNextPageParam: (lastPage) => lastPage.nextCursor,

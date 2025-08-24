@@ -6,6 +6,7 @@ import {
     BsPlusSquare,
     BsPlusSquareFill,
 } from 'react-icons/bs';
+import { FaPinterest } from 'react-icons/fa';
 import { GoHome, GoHomeFill } from 'react-icons/go';
 import { IoSettings, IoSettingsOutline } from 'react-icons/io5';
 import { Link, useLocation } from 'react-router-dom';
@@ -42,7 +43,7 @@ const menuItems = [
             active: <BsChatDotsFill className='text-2xl' />,
             inactive: <BsChatDots className='text-2xl text-black' />,
         },
-        link: '/chats',
+        link: '/chat',
     },
     {
         id: 5,
@@ -79,12 +80,7 @@ export default function LeftBar() {
         >
             <div className='flex flex-col items-center gap-6'>
                 <Link to={'/'}>
-                    <ImageKit
-                        src='Pinterest/general/logo.png'
-                        alt='Logo'
-                        className='w-[25px] h-[25px] sm:w-[26px] sm:h-[26px] lg:w-[27px] lg:h-[27px] 
-                        xl:w-[28px] xl:h-[28px] 2xl:w-[29px] 2xl:h-[29px] mt-2'
-                    />
+                    <FaPinterest className='text-red-500 text-3xl mt-1' />
                 </Link>
                 <div className='flex flex-col items-center gap-6'>
                     {menuItems.slice(0, 4).map((item) => (

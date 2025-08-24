@@ -1,14 +1,28 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { IoMdArrowBack } from 'react-icons/io';
-import Gallary from '../../components/gallary/gallery';
 import Comments from '../../components/comments/comments';
 import ImageKit from '../../components/share/image-custom';
 import Interactions from '../../components/comments/interactions';
 import { FaArrowUp } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+const fetchPinById = async ({ queryKey }) => {
+    const [_, id] = queryKey;
+    const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/pins/${id}`);
+    return res.data;
+};
 
 export default function PostPage() {
     const [goToTop, setGoToTop] = useState(false);
+    const { id } = useParams();
+    const { isPending, error, data } = useQuery({
+        queryKey: ['post', id],
+        queryFn: fetchPinById,
+    });
+    const userInfo = data?.user;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -25,35 +39,48 @@ export default function PostPage() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    if (isPending)
+        return (
+            <p className='text-center text-xl font-semibold italic text-zinc-600'>
+                Please wait, loading pins...
+            </p>
+        );
+    if (error)
+        return (
+            <p className='text-center text-xl font-bold text-red-500'>
+                Something went wrong! Please try again later.
+            </p>
+        );
+
     return (
         <div className='relative flex flex-col items-center justify-center w-full h-full gap-4'>
             {goToTop && (
                 <button
                     className='fixed z-30 bottom-[10%] right-10 flex items-center justify-center p-3 gap-1 cursor-pointer
-            rounded-full bg-gray-200 hover:bg-black transition-colors duration-200 group'
+        rounded-full bg-gray-200 hover:bg-black transition-colors duration-200 group'
                     onClick={handleGoToTop}
                 >
                     <FaArrowUp
-                        className='text-2xl text-gray-700 group-hover:text-white 
-                transition-colors duration-200'
+                        className='text-2xl text-gray-700 group-hover:text-white
+            transition-colors duration-200'
                     />
                 </button>
             )}
             <div className='flex justify-center gap-1 md:gap-2 lg:gap-3 xl:gap-4 my-5 sm:my-3'>
                 <Link
                     to={'/'}
-                    className='cursor-pointer rounded-xl md:rounded-2xl hover:bg-[#f1f1f1] 
-                    p-1 sm:p-2 h-fit hidden sm:block group'
+                    className='cursor-pointer rounded-xl md:rounded-2xl hover:bg-[#f1f1f1]
+                p-1 sm:p-2 h-fit hidden sm:block group'
                 >
                     <IoMdArrowBack className='text-xl sm:text-2xl md:text-3xl text-zinc-500 group-hover:text-zinc-800' />
                 </Link>
                 <div
                     className='flex flex-col sm:flex-row w-[80%] lg:w-[85%] 2xl:w-[90%] 3xl:w-full sm:max-h-[650px]
-                    border border-[#e9e9e9] overflow-hidden rounded-3xl sm:rounded-4xl bg-white'
+                border border-[#e9e9e9] overflow-hidden rounded-3xl sm:rounded-4xl bg-white'
                 >
                     <div className='flex flex-1'>
                         <ImageKit
-                            src={'Pinterest/pins/pin1.jpeg'}
+                            src={data?.image}
                             alt='Image detail'
                             className=' sm:rounded-tl-2xl sm:rounded-bl-2xl w-full'
                             width={736}
@@ -62,23 +89,22 @@ export default function PostPage() {
                     <div className='h-full flex flex-col flex-1 gap-4 sm:gap-8 p-4 overflow-hidden'>
                         <Interactions />
                         <Link
-                            to={'/dHuy'}
+                            to={`/${userInfo?.username}`}
                             className='w-fit flex justify-start items-center gap-2 group cursor-pointer'
                         >
                             <ImageKit
-                                src={'Pinterest/general/noAvatar.png'}
+                                src={userInfo?.avatar}
                                 alt='Image detail'
                                 className='rounded-full w-8 h-8'
                             />
                             <span className='font-medium text-[16px] sm:text-sm group-hover:text-blue-500'>
-                                dHuy
+                                {userInfo?.username || 'Unknown'}
                             </span>
                         </Link>
                         <Comments />
                     </div>
                 </div>
             </div>
-            <Gallary />
         </div>
     );
 }
