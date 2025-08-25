@@ -53,7 +53,10 @@ export default function PostPage() {
         );
 
     return (
-        <div className='relative flex flex-col items-center justify-center w-full h-full gap-4'>
+        <div
+            className='relative flex flex-col items-center justify-start pt-5 
+        overflow-hidden w-full h-full gap-4'
+        >
             {goToTop && (
                 <button
                     className='fixed z-30 bottom-[10%] right-10 flex items-center justify-center p-3 gap-1 cursor-pointer
@@ -101,7 +104,7 @@ export default function PostPage() {
                                 {userInfo?.username || 'Unknown'}
                             </span>
                         </Link>
-                        <Comments />
+                        <Comments postId={id} />
                     </div>
                 </div>
             </div>

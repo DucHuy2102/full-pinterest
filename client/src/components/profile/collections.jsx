@@ -10,7 +10,7 @@ const fetchBoardById = async ({ queryKey }) => {
 
 export default function Collections({ userId }) {
     const { isPending, error, data } = useQuery({
-        queryKey: ['post', userId],
+        queryKey: ['boards', userId],
         queryFn: fetchBoardById,
     });
 

@@ -19,7 +19,7 @@ export default function ProfilePage() {
     const [chosenTab, setChosenTab] = useState('created');
     const { username } = useParams();
     const { isPending, error, data } = useQuery({
-        queryKey: ['post', username],
+        queryKey: ['profile', username],
         queryFn: fetchPinById,
     });
 
