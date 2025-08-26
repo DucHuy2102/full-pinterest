@@ -8,55 +8,8 @@ import ChangeState from './change-state';
 
 export default function Auth() {
     const [state, setState] = useState('LOGIN');
-    const [form, setForm] = useState({
-        username: '',
-        email: '',
-        password: '',
-    });
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-
     const handleChangeState = (newState) => {
         setState(newState);
-    };
-
-    const handleChangeInput = (e) => {
-        const { name, value } = e.target;
-        setForm((prevForm) => ({
-            ...prevForm,
-            [name]: value,
-        }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (state === 'LOGIN') {
-            if (!form.email || !form.password) {
-                setError('Please fill in all fields');
-                return;
-            }
-        } else if (state === 'REGISTER') {
-            if (!form.username || !form.email || !form.password) {
-                setError('Please fill in all fields');
-                return;
-            }
-        } else {
-            if (!form.email) {
-                setError('Email is required');
-                return;
-            }
-        }
-
-        try {
-            console.log({ form });
-        } catch (error) {
-            setError('An error occurred');
-            console.log({ error });
-        } finally {
-            setIsLoading(true);
-            setError(null);
-        }
     };
 
     return (
@@ -82,15 +35,7 @@ export default function Auth() {
                 </div>
             ) : (
                 <div className='w-full px-20'>
-                    <LoginRegisterForm
-                        state={state}
-                        form={form}
-                        isLoading={isLoading}
-                        error={error}
-                        handleChangeInput={handleChangeInput}
-                        handleChangeState={handleChangeState}
-                        handleSubmit={handleSubmit}
-                    />
+                    <LoginRegisterForm state={state} handleChangeState={handleChangeState} />
 
                     <p className='uppercase font-semibold text-zinc-600 w-full text-center py-2'>
                         or

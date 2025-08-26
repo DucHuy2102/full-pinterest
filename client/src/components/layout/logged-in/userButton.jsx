@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import ImageKit from '../../share/image-custom';
 import MenuUser from './menuUser';
+import useAuthStore from '../../../store/authStore';
 
-const UserLoggedIn = () => {
+const UserLoggedIn = ({ avatar }) => {
     const [openUserMenu, setOpenUserMenu] = useState(false);
     const menuRef = useRef(null);
     const arrowRef = useRef(null);
@@ -36,11 +37,7 @@ const UserLoggedIn = () => {
     return (
         <div className='relative hidden sm:flex items-center gap-3'>
             <div className='rounded-2xl p-1.5 hover:bg-[#f1f1f1] cursor-pointer'>
-                <ImageKit
-                    src='Pinterest/general/noAvatar.png'
-                    alt='Avatar User'
-                    className='w-9 h-9 rounded-full'
-                />
+                <ImageKit src={avatar} alt='Avatar User' className='w-9 h-9 rounded-full' />
             </div>
             <IoIosArrowDown
                 className={`${
@@ -64,7 +61,7 @@ const UserLoggedOut = () => {
 };
 
 export default function UserButton() {
-    const currentUser = true;
+    const { user, isLoggedIn } = useAuthStore();
 
-    return currentUser ? <UserLoggedIn /> : <UserLoggedOut />;
+    return isLoggedIn ? <UserLoggedIn {...user} /> : <UserLoggedOut />;
 }

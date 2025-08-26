@@ -3,6 +3,7 @@ import LeftBar from './components/layout/logged-in/leftBar';
 import TopBar from './components/layout/logged-in/topBar';
 import BottomBar from './components/layout/logged-in/bottomBar';
 import NotLoggedInPage from './pages/not-logged-in/homePage';
+import useAuthStore from './store/authStore';
 
 const LoginSuccess = () => {
     return (
@@ -20,7 +21,7 @@ const LoginSuccess = () => {
 };
 
 export default function DefaultLayout() {
-    const isUserLoggedIn = true;
+    const { isLoggedIn } = useAuthStore();
 
-    return <>{isUserLoggedIn ? <LoginSuccess /> : <NotLoggedInPage />}</>;
+    return <>{isLoggedIn ? <LoginSuccess /> : <NotLoggedInPage />}</>;
 }

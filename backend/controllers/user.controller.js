@@ -1,10 +1,17 @@
 import UserModel from '../models/user.model.js';
 import bcryptjs from 'bcryptjs';
+import generateTokenAndSetCookie from '../utils/generateTokenAndSetCookie.js';
 
 export const signup = async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+        return res.status(400).json({
+            success: false,
+            message: 'All fields are required',
+        });
+    }
 
+    try {
         const normalizedEmail = email.toLowerCase();
         const isUserExist = await UserModel.findOne({
             $or: [{ username }, { email: normalizedEmail }],
@@ -23,7 +30,7 @@ export const signup = async (req, res) => {
             hashedPassword,
         }).save();
         const { hashedPassword: pass, ...rest } = newUser._doc;
-        res.status(201).json({
+        generateTokenAndSetCookie(newUser._id, res).status(201).json({
             success: true,
             message: 'User signed up successfully',
             user: rest,
@@ -38,11 +45,67 @@ export const signup = async (req, res) => {
 };
 
 export const signin = async (req, res) => {
-    // signin logic
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({
+            success: false,
+            message: 'All fields are required',
+        });
+    }
+
+    try {
+        const normalizedEmail = email.toLowerCase();
+        const user = await UserModel.findOne({ email: normalizedEmail });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+        const isPasswordValid = await bcryptjs.compare(password, user.hashedPassword);
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                success: false,
+                message: 'Password is incorrect',
+            });
+        }
+        const { hashedPassword, ...rest } = user._doc;
+        generateTokenAndSetCookie(user._id, res).status(200).json({
+            success: true,
+            message: 'User signed in successfully',
+            user: rest,
+        });
+    } catch (error) {
+        console.log('Error in signin controller', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error in signin controller',
+        });
+    }
 };
 
 export const signout = async (req, res) => {
-    // signout logic
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(401).json({
+                success: false,
+                message: 'User not logged in',
+            });
+        } else {
+            res.clearCookie('token');
+            res.status(200).json({
+                success: true,
+                message: 'User logged out successfully',
+            });
+        }
+    } catch (error) {
+        console.log('Error in signout controller', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error in signout controller',
+        });
+    }
 };
 
 export const forgotPassword = async (req, res) => {
