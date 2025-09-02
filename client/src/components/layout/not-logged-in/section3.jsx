@@ -1,4 +1,4 @@
-import ImageKit from '../../share/image-custom';
+import ImageCustom from '../../share/image-custom';
 
 export default function Section3() {
     return (
@@ -22,25 +22,25 @@ export default function Section3() {
                 >
                     Explore
                 </button>
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin1.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200
                     w-1/5 h-2/6 top-1/4 left-1/7 -translate-x-1/4 -translate-y-2/4 rotate-[30deg]'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin2.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200
                     w-1/3 h-2/6 bottom-1/7 left-1/7 -translate-x-1/4 translate-y-1/2 -rotate-[30deg]'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin3.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200
                     w-1/4 h-1/3 bottom-1/5 right-1/7 translate-x-1/5 translate-y-1/2 rotate-[30deg]'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin4.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200
@@ -50,7 +50,7 @@ export default function Section3() {
             <div className='relative hidden sm:flex flex-1'>
                 <div className='absolute w-1/2 h-1/2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                     <div className='relative w-full h-full'>
-                        <ImageKit
+                        <ImageCustom
                             src='Pinterest/pins/pin6.jpeg'
                             alt='Description of the image'
                             className='w-full h-full rounded-4xl'
@@ -65,7 +65,7 @@ export default function Section3() {
                 </div>
                 <div className='absolute w-1/3 h-1/2 top-1/4 left-1/12 -translate-x-1/3 -translate-y-1/3'>
                     <div className='relative w-full h-full'>
-                        <ImageKit
+                        <ImageCustom
                             src='Pinterest/pins/pin7.jpeg'
                             alt='Description of the image'
                             className='w-full h-full rounded-4xl'
@@ -80,7 +80,7 @@ export default function Section3() {
                 </div>
                 <div className='absolute w-1/3 h-1/3 bottom-1/5 right-1/5 translate-x-1/2 translate-y-1/2'>
                     <div className='relative w-full h-full'>
-                        <ImageKit
+                        <ImageCustom
                             src='Pinterest/pins/pin8.jpeg'
                             alt='Description of the image'
                             className='w-full h-full rounded-4xl'
@@ -95,7 +95,7 @@ export default function Section3() {
                 </div>
                 <div className='absolute w-1/4 h-1/4 bottom-1/6 left-1/5 -translate-x-1/2 translate-y-1/2'>
                     <div className='relative w-full h-full'>
-                        <ImageKit
+                        <ImageCustom
                             src='Pinterest/pins/pin9.jpeg'
                             alt='Description of the image'
                             className='w-full h-full rounded-4xl'
@@ -110,7 +110,7 @@ export default function Section3() {
                 </div>
                 <div className='absolute w-1/4 h-1/4 top-1/4 right-1/12 translate-x-1/12 -translate-y-1/2'>
                     <div className='relative w-full h-full'>
-                        <ImageKit
+                        <ImageCustom
                             src='Pinterest/pins/pin10.jpeg'
                             alt='Description of the image'
                             className='w-full h-full rounded-4xl'

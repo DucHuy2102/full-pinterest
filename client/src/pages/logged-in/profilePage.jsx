@@ -1,5 +1,5 @@
 import { LuUpload } from 'react-icons/lu';
-import ImageKit from '../../components/share/image-custom';
+import ImageCustom from '../../components/share/image-custom';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { LuDot } from 'react-icons/lu';
 import { useState } from 'react';
@@ -41,7 +41,7 @@ export default function ProfilePage() {
             className='my-5 sm:my-3 mx-5 sm:mx-4 md:mx-3 lg:mx-2 xl:mx-1 2xl:mx-0 
         flex flex-col gap-4 justify-center items-center'
         >
-            <ImageKit
+            <ImageCustom
                 src={data?.user.avatar}
                 alt='Image avatar'
                 className='rounded-full w-[110px] h-[110px] sm:w-[120px] sm:h-[120px] 

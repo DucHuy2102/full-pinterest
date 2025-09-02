@@ -1,9 +1,12 @@
 import { Image } from '@imagekit/react';
 import { forwardRef, useCallback, useState } from 'react';
 
-const urlEndpoint = import.meta.env.VITE_URL_Endpoint;
+const urlEndpoint = import.meta.env.VITE_IMAGEKIT_URL;
 
-const ImageKit = forwardRef(function ImageKit({ src, alt, className, width, height }, externalRef) {
+const ImageCustom = forwardRef(function ImageCustom(
+    { src, alt, className, width, height },
+    externalRef
+) {
     const [showPlaceholder, setShowPlaceholder] = useState(true);
 
     const imgRef = useCallback(
@@ -48,4 +51,4 @@ const ImageKit = forwardRef(function ImageKit({ src, alt, className, width, heig
     );
 });
 
-export default ImageKit;
+export default ImageCustom;

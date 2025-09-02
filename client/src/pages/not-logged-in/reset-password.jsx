@@ -1,5 +1,5 @@
 import ResetPasswordForm from '../../components/auth/reset-password-form';
-import ImageKit from '../../components/share/image-custom';
+import ImageCustom from '../../components/share/image-custom';
 import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 
@@ -7,7 +7,7 @@ export default function ResetPassword() {
     return (
         <div className='w-full h-screen flex justify-between bg-white'>
             <div className='w-1/2 h-full'>
-                <ImageKit
+                <ImageCustom
                     src={'Pinterest/pins/pin1.jpeg'}
                     alt='Pinterest Image Reset Password'
                     className='w-full h-full'

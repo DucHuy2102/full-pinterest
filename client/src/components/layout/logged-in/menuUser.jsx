@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { forwardRef } from 'react';
 import { IoCheckmark } from 'react-icons/io5';
-import ImageKit from '../../share/image-custom';
+import ImageCustom from '../../share/image-custom';
 import useAuthStore from '../../../store/authStore';
 
 const MenuUser = forwardRef((_, ref) => {
@@ -33,7 +33,7 @@ const MenuUser = forwardRef((_, ref) => {
         >
             <span className='text-zinc-500 text-[12px] font-semibold py-2 px-3'>Currently in</span>
             <div className='flex items-center gap-3 hover:bg-[#f6f6f3] rounded-lg cursor-pointer py-2 px-3'>
-                <ImageKit
+                <ImageCustom
                     src={user?.avatar}
                     alt='Avatar User'
                     className='w-[60px] h-[60px] rounded-full'

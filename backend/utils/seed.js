@@ -3,7 +3,7 @@ import bcryptjs from 'bcryptjs';
 import connectDatabase from '../database/connectDb.js';
 import UserModel from '../models/user.model.js';
 import PinModel from '../models/pin.model.js';
-import BoardModel from '../models/broad.model.js';
+import BoardModel from '../models/board.model.js';
 import CommentModel from '../models/comment.model.js';
 
 connectDatabase();
@@ -67,6 +67,7 @@ const seedDB = async () => {
             const randomPin = pins[Math.floor(Math.random() * pins.length)];
             const comment = new CommentModel({
                 description: fakerEN.lorem.sentence(),
+                image: `https://picsum.photos/id/${i + 20}/800/600`,
                 pin: randomPin._id,
                 user: user._id,
             });

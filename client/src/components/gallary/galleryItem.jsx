@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import ImageKit from '../share/image-custom';
+import ImageCustom from '../share/image-custom';
 
 export default function GalleryItem({ _id, image, width, height }) {
     const optimizedHeight = (372 * height) / width;
@@ -9,7 +9,7 @@ export default function GalleryItem({ _id, image, width, height }) {
             className='relative flex group'
             style={{ gridRowEnd: `span ${Math.ceil(height / 100)}` }}
         >
-            <ImageKit
+            <ImageCustom
                 src={image}
                 alt={`Gallery item ${_id}`}
                 className='w-full object-cover rounded-2xl cursor-pointer'

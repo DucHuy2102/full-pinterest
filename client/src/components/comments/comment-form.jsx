@@ -1,19 +1,40 @@
 import { useEffect, useRef, useState } from 'react';
 import { BsEmojiSmile } from 'react-icons/bs';
 import EmojiPicker from 'emoji-picker-react';
-import FsLightbox from 'fslightbox-react';
 import { HiOutlinePhoto } from 'react-icons/hi2';
 import { IoSendOutline } from 'react-icons/io5';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import PreviewImage from './preview-image';
+import { uploadImage } from '../../utils/upload-image';
 
-export default function CommentForm() {
+const addComment = async (comment) => {
+    const res = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/comments/create`, comment, {
+        withCredentials: true,
+    });
+    return res.data;
+};
+
+export default function CommentForm({ postId }) {
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [commentImage, setCommentImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [newComment, setNewComment] = useState('');
-    const [toggler, setToggler] = useState(false);
     const emojiPickerRef = useRef(null);
     const iconEmojiRef = useRef(null);
     const fileInputRef = useRef(null);
+
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: addComment,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['comments', postId] });
+            setNewComment('');
+            setCommentImage(null);
+            setPreviewImage(null);
+            fileInputRef.current.value = null;
+        },
+    });
 
     useEffect(() => {
         if (!showEmojiPicker) return;
@@ -35,7 +56,6 @@ export default function CommentForm() {
         };
     }, [showEmojiPicker]);
 
-    // call api to upload image to server here ...
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -44,30 +64,38 @@ export default function CommentForm() {
         }
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        let imageUrl = null;
+        if (commentImage) {
+            imageUrl = await uploadImage(commentImage);
+        }
+        if (!imageUrl) {
+            console.error('Image upload failed. Comment not submitted.');
+            return;
+        }
+
+        mutation.mutate({
+            comment: newComment.trim(),
+            image: imageUrl,
+            postId,
+        });
+    };
+
+    const onRemove = () => {
+        setPreviewImage(null);
+        setCommentImage(null);
+        fileInputRef.current.value = null;
+    };
+
     return (
         <>
-            <FsLightbox toggler={toggler} sources={[previewImage]} />
-            {previewImage && (
-                <div
-                    className='relative w-20 h-20 rounded-md overflow-hidden self-start mb-2 cursor-zoom-in'
-                    onClick={() => setToggler(!toggler)}
-                >
-                    <img src={previewImage} alt='Preview' className='w-full h-full object-cover' />
-                    <button
-                        className='absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 
-                        leading-none text-xs cursor-pointer flex items-center justify-center'
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setPreviewImage(null);
-                            setCommentImage(null);
-                            fileInputRef.current.value = null;
-                        }}
-                    >
-                        &times;
-                    </button>
-                </div>
-            )}
-            <form className='bg-[#f1f1f1] px-4 py-2 rounded-4xl flex items-center gap-4'>
+            {previewImage && <PreviewImage previewImage={previewImage} onRemove={onRemove} />}
+            <form
+                className='bg-[#f1f1f1] px-4 py-2 rounded-4xl flex items-center gap-4'
+                onSubmit={handleSubmit}
+            >
                 <input
                     type='text'
                     value={newComment}
@@ -82,7 +110,9 @@ export default function CommentForm() {
                     {showEmojiPicker && (
                         <div ref={iconEmojiRef} className='absolute z-10 bottom-12 right-0'>
                             <EmojiPicker
-                                onEmojiClick={(emoji) => setNewComment(newComment + emoji.emoji)}
+                                onEmojiClick={(emoji) =>
+                                    setNewComment(newComment + ' ' + emoji.emoji)
+                                }
                             />
                         </div>
                     )}
@@ -98,14 +128,16 @@ export default function CommentForm() {
                             onChange={handleFileChange}
                         />
                     </div>
-                    {newComment && (
-                        <div
-                            className='cursor-pointer bg-red-500 rounded-lg px-1.5 py-1 text-white 
+                    {newComment ||
+                        (commentImage && (
+                            <button
+                                type='submit'
+                                className='cursor-pointer bg-red-500 rounded-lg px-1.5 py-1 text-white 
                                 flex items-center justify-center'
-                        >
-                            <IoSendOutline className='text-[16px]' />
-                        </div>
-                    )}
+                            >
+                                <IoSendOutline className='text-[16px]' />
+                            </button>
+                        ))}
                 </div>
             </form>
         </>

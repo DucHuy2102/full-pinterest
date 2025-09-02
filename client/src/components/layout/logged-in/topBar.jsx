@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import UserButton from './userButton';
-import ImageKit from '../../share/image-custom';
+import ImageCustom from '../../share/image-custom';
 import SearchBar from './searchBar';
 
 export default function TopBar() {
@@ -10,7 +10,7 @@ export default function TopBar() {
         flex items-center gap-5 sm:gap-3 bg-white p-3 sm:p-4'
         >
             <Link to={'/'} className='block sm:hidden'>
-                <ImageKit src='Pinterest/general/logo.png' alt='Logo' className='w-7 h-7' />
+                <ImageCustom src='Pinterest/general/logo.png' alt='Logo' className='w-7 h-7' />
             </Link>
 
             {/* search */}

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { LuDot } from 'react-icons/lu';
-import ImageKit from '../share/image-custom';
+import ImageCustom from '../share/image-custom';
 import { format } from 'timeago.js';
 
 export default function CollectionItem({ board }) {
@@ -13,7 +13,7 @@ export default function CollectionItem({ board }) {
                     to={`/search?boardId=${board._id}`}
                     className='cursor-pointer mb-14 hover:scale-105 transition-transform duration-200'
                 >
-                    <ImageKit
+                    <ImageCustom
                         src={imageSrc}
                         alt='Image avatar'
                         className='h-full w-full rounded-2xl'

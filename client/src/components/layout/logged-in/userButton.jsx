@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
-import ImageKit from '../../share/image-custom';
+import ImageCustom from '../../share/image-custom';
 import MenuUser from './menuUser';
 import useAuthStore from '../../../store/authStore';
 
@@ -37,7 +37,7 @@ const UserLoggedIn = ({ avatar }) => {
     return (
         <div className='relative hidden sm:flex items-center gap-3'>
             <div className='rounded-2xl p-1.5 hover:bg-[#f1f1f1] cursor-pointer'>
-                <ImageKit src={avatar} alt='Avatar User' className='w-9 h-9 rounded-full' />
+                <ImageCustom src={avatar} alt='Avatar User' className='w-9 h-9 rounded-full' />
             </div>
             <IoIosArrowDown
                 className={`${

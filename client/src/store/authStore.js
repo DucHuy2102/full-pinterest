@@ -9,6 +9,7 @@ const useAuthStore = create(
 
             setUser: (user) => set({ user, isLoggedIn: !!user }),
             clearUser: () => set({ user: null, isLoggedIn: false }),
+            updateUser: (user) => set({ user, isLoggedIn: !!user }),
         }),
         {
             name: 'auth-storage',

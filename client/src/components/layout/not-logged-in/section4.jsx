@@ -1,20 +1,20 @@
-import ImageKit from '../../share/image-custom';
+import ImageCustom from '../../share/image-custom';
 
 export default function Section4() {
     return (
         <div className='overflow-hidden h-screen w-full flex'>
             <div className='w-1/2 relative'>
-                <ImageKit
+                <ImageCustom
                     src='https://s.pinimg.com/webapp/shop-de8ddf10.png'
                     alt='Image section 5'
                     className='w-full h-full'
                 />
-                <ImageKit
+                <ImageCustom
                     src='https://s.pinimg.com/webapp/creator-pin-img-3bed5463.png'
                     alt='Image section 5'
                     className='w-[30%] h-[60%] absolute z-10 top-[30%] left-[15%] rounded-3xl'
                 />
-                <ImageKit
+                <ImageCustom
                     src='https://s.pinimg.com/webapp/creator-avatar-262dfeba.png'
                     alt='Image section 5'
                     className='w-[10%] h-[10%] absolute z-20 hover:scale-105 transition-transform duration-200 

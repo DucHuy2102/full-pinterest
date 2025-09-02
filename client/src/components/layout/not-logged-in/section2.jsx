@@ -1,11 +1,11 @@
-import ImageKit from '../../share/image-custom';
+import ImageCustom from '../../share/image-custom';
 import { CiSearch } from 'react-icons/ci';
 
 export default function Section2() {
     return (
         <div className='bg-[#fffd92] w-full h-screen flex overflow-hidden px-10'>
             <div className='relative hidden sm:flex flex-1'>
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin1.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 md:z-30 lg:z-10 xl:z-30 transform rounded-3xl hover:scale-105 transition-transform duration-200
@@ -14,7 +14,7 @@ export default function Section2() {
                     lg:left-1/5 lg:-translate-x-1/5 lg:-rotate-6
                     xl:w-1/3 xl:h-2/3 xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2 xl:rotate-none'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin2.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:z-20 xl:z-10 transform rounded-3xl hover:scale-105 transition-transform duration-200
@@ -23,7 +23,7 @@ export default function Section2() {
                     lg:w-1/3 lg:top-1/4 lg:right-1/4 lg:translate-x-2/3 lg:-rotate-12
                     xl:w-1/4 xl:h-1/2 xl:top-1/2 xl:left-1/5 xl:-translate-x-1/5 xl:-translate-y-1/2 xl:rotate-none'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin3.jpeg'
                     alt='Description of the image'
                     className='absolute z-40 sm:z-30 md:z-40 lg:z-10 xl:z-10 transform rounded-3xl hover:scale-105 transition-transform duration-200
@@ -33,7 +33,7 @@ export default function Section2() {
                     xl:w-1/4 xl:h-1/3 xl:top-1/5 xl:right-1/2 xl:translate-x-1/2 xl:-translate-y-1/5 xl:rotate-none
                     2xl:h-1/2'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin4.jpeg'
                     alt='Description of the image'
                     className='absolute z-40 md:z-30 lg:z-20 xl:z-30 transform rounded-3xl hover:scale-105 transition-transform duration-200
@@ -74,25 +74,25 @@ export default function Section2() {
                 >
                     Explore
                 </button>
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin1.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200
                     w-1/5 h-2/6 top-1/4 left-1/7 -translate-x-1/4 -translate-y-2/4 rotate-[30deg]'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin2.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200
                     w-1/3 h-2/6 bottom-1/7 left-1/7 -translate-x-1/4 translate-y-1/2 -rotate-[30deg]'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin3.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200
                     w-1/4 h-1/3 bottom-1/5 right-1/7 translate-x-1/5 translate-y-1/2 rotate-[30deg]'
                 />
-                <ImageKit
+                <ImageCustom
                     src='Pinterest/pins/pin4.jpeg'
                     alt='Description of the image'
                     className='absolute z-10 sm:hidden transform rounded-3xl hover:scale-105 transition-transform duration-200

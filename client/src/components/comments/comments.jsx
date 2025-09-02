@@ -5,90 +5,6 @@ import CommentForm from './comment-form';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-const COMMENTS = [
-    {
-        id: 1,
-        user: {
-            id: 1,
-            name: 'User1',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment:
-            'This is a comment on a post. lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        time: '1h',
-    },
-    {
-        id: 2,
-        user: {
-            id: 2,
-            name: 'User2',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment: 'This is another comment',
-        time: '2h',
-    },
-    {
-        id: 3,
-        user: {
-            id: 3,
-            name: 'User3',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment: 'This is a comment',
-        time: '1h',
-    },
-    {
-        id: 4,
-        user: {
-            id: 4,
-            name: 'User4',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment: 'This is another comment',
-        time: '2h',
-    },
-    {
-        id: 5,
-        user: {
-            id: 5,
-            name: 'User5',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment: 'This is a comment',
-        time: '1h',
-    },
-    {
-        id: 6,
-        user: {
-            id: 6,
-            name: 'User6',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment: 'This is another comment',
-        time: '2h',
-    },
-    {
-        id: 7,
-        user: {
-            id: 7,
-            name: 'User7',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment: 'This is a comment',
-        time: '1h',
-    },
-    {
-        id: 8,
-        user: {
-            id: 8,
-            name: 'User8',
-            avatar: 'Pinterest/general/noAvatar.png',
-        },
-        comment: 'This is a comment',
-        time: '1.5h',
-    },
-];
-
 const fetchCommentsById = async ({ queryKey }) => {
     const [_, postId] = queryKey;
     const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/comments/${postId}`);
@@ -153,19 +69,27 @@ export default function Comments({ postId }) {
                     {/* laptop screen & tablet */}
                     <div className='hidden sm:flex flex-col flex-1 gap-4 overflow-y-auto'>
                         {showAllComments
-                            ? data?.map((comment) => <Comment key={comment._id} {...comment} />)
+                            ? data?.map((comment) => (
+                                  <Comment key={comment._id} postId={postId} {...comment} />
+                              ))
                             : data
                                   ?.slice(0, 3)
-                                  .map((comment) => <Comment key={comment._id} {...comment} />)}
+                                  .map((comment) => (
+                                      <Comment key={comment._id} postId={postId} {...comment} />
+                                  ))}
                     </div>
 
                     {/* mobile screen */}
                     <div className='flex flex-col flex-1 gap-4 overflow-y-auto sm:hidden'>
                         {showAllComments
-                            ? data?.map((comment) => <Comment key={comment._id} {...comment} />)
+                            ? data?.map((comment) => (
+                                  <Comment key={comment._id} postId={postId} {...comment} />
+                              ))
                             : data
                                   ?.slice(0, 3)
-                                  .map((comment) => <Comment key={comment._id} {...comment} />)}
+                                  .map((comment) => (
+                                      <Comment key={comment._id} postId={postId} {...comment} />
+                                  ))}
                     </div>
                 </>
             ) : (
@@ -174,7 +98,7 @@ export default function Comments({ postId }) {
                 </p>
             )}
 
-            <CommentForm />
+            <CommentForm postId={postId} />
         </div>
     );
 }

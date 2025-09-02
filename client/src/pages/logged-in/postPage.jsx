@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import { IoMdArrowBack } from 'react-icons/io';
 import Comments from '../../components/comments/comments';
-import ImageKit from '../../components/share/image-custom';
+import ImageCustom from '../../components/share/image-custom';
 import Interactions from '../../components/comments/interactions';
 import { FaArrowUp } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
@@ -82,7 +82,7 @@ export default function PostPage() {
                 border border-[#e9e9e9] overflow-hidden rounded-3xl sm:rounded-4xl bg-white'
                 >
                     <div className='flex flex-1'>
-                        <ImageKit
+                        <ImageCustom
                             src={data?.image}
                             alt='Image detail'
                             className=' sm:rounded-tl-2xl sm:rounded-bl-2xl w-full'
@@ -95,7 +95,7 @@ export default function PostPage() {
                             to={`/${userInfo?.username}`}
                             className='w-fit flex justify-start items-center gap-2 group cursor-pointer'
                         >
-                            <ImageKit
+                            <ImageCustom
                                 src={userInfo?.avatar}
                                 alt='Image detail'
                                 className='rounded-full w-8 h-8'

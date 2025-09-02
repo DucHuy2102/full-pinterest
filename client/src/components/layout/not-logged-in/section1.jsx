@@ -1,4 +1,3 @@
-import ImageKit from '../../share/image-custom';
 import Auth from '../../auth/auth';
 
 export default function Section1() {
