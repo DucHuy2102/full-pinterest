@@ -8,6 +8,7 @@ import Interactions from '../../components/comments/interactions';
 import { FaArrowUp } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import ImagePost from '../../components/posts/image-post';
 
 const fetchPinById = async ({ queryKey }) => {
     const [_, id] = queryKey;
@@ -81,14 +82,7 @@ export default function PostPage() {
                     className='flex flex-col sm:flex-row w-[80%] lg:w-[85%] 2xl:w-[90%] 3xl:w-full sm:max-h-[650px]
                 border border-[#e9e9e9] overflow-hidden rounded-3xl sm:rounded-4xl bg-white'
                 >
-                    <div className='flex flex-1'>
-                        <ImageCustom
-                            src={data?.image}
-                            alt='Image detail'
-                            className=' sm:rounded-tl-2xl sm:rounded-bl-2xl w-full'
-                            width={736}
-                        />
-                    </div>
+                    <ImagePost image={data?.image} />
                     <div className='h-full flex flex-col flex-1 gap-4 sm:gap-8 p-4 overflow-hidden'>
                         <Interactions />
                         <Link

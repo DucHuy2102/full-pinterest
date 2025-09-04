@@ -6,16 +6,26 @@ import { useState } from 'react';
 import { format } from 'timeago.js';
 import FsLightbox from 'fslightbox-react';
 import MenuOptions from './menu-options';
+import useCommentStore from '../../store/commentStore';
 
 export default function Comment({ postId, _id, user, description, image, createdAt }) {
     const { username, avatar } = user;
     const [isLikeComment, setIsLikeComment] = useState(false);
     const [toggler, setToggler] = useState(false);
+    const setComment = useCommentStore((state) => state.setComment);
 
     const handleLikeComment = (idComment) => {
         console.log({ idComment });
         // call api here, if success then set state
         setIsLikeComment((prev) => !prev);
+    };
+
+    const handleEditComment = (commentId, description, image) => {
+        setComment({
+            commentId,
+            description,
+            image,
+        });
     };
 
     return (
@@ -50,7 +60,12 @@ export default function Comment({ postId, _id, user, description, image, created
                             <GoHeart className='w-4 h-4' />
                         )}
                     </span>
-                    <MenuOptions user={user} postId={postId} commentId={_id} />
+                    <MenuOptions
+                        user={user}
+                        postId={postId}
+                        commentId={_id}
+                        onClickEdit={() => handleEditComment(_id, description, image)}
+                    />
                 </div>
             </div>
         </div>

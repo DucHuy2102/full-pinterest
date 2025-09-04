@@ -7,15 +7,24 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import PreviewImage from './preview-image';
 import { uploadImage } from '../../utils/upload-image';
+import useCommentStore from '../../store/commentStore';
 
-const addComment = async (comment) => {
-    const res = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/comments/create`, comment, {
-        withCredentials: true,
-    });
+const fetchComment = async ({ comment, isEditing, commentId }) => {
+    const method = isEditing ? 'put' : 'post';
+    const endpoint = isEditing ? `update/${commentId}` : 'create';
+    const res = await axios[method](
+        `${import.meta.env.VITE_API_ENDPOINT}/comments/${endpoint}`,
+        comment,
+        {
+            withCredentials: true,
+        }
+    );
     return res.data;
 };
 
 export default function CommentForm({ postId }) {
+    const { comment: commentStore, isEditing } = useCommentStore();
+    const clearComment = useCommentStore((state) => state.clearComment);
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [commentImage, setCommentImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
@@ -26,7 +35,7 @@ export default function CommentForm({ postId }) {
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
-        mutationFn: addComment,
+        mutationFn: (data) => fetchComment(data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['comments', postId] });
             setNewComment('');
@@ -35,6 +44,16 @@ export default function CommentForm({ postId }) {
             fileInputRef.current.value = null;
         },
     });
+
+    useEffect(() => {
+        if (isEditing) {
+            setNewComment(commentStore.description);
+            if (commentStore.image) {
+                setCommentImage(commentStore.image);
+                setPreviewImage(commentStore.image);
+            }
+        }
+    }, [isEditing, commentStore, clearComment]);
 
     useEffect(() => {
         if (!showEmojiPicker) return;
@@ -67,20 +86,30 @@ export default function CommentForm({ postId }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let imageUrl = null;
-        if (commentImage) {
+        let imageUrl = commentStore?.image || null;
+        if (commentImage && commentImage !== commentStore?.image) {
+            console.log(commentImage && commentImage !== commentStore?.image, {
+                commentImage,
+                commentStore,
+            });
             imageUrl = await uploadImage(commentImage);
+            if (!imageUrl) {
+                console.error('Image upload failed. Comment not submitted.');
+                return;
+            }
         }
-        if (!imageUrl) {
-            console.error('Image upload failed. Comment not submitted.');
-            return;
-        }
-
-        mutation.mutate({
+        const dataToSubmit = {
             comment: newComment.trim(),
             image: imageUrl,
             postId,
+        };
+
+        mutation.mutate({
+            comment: dataToSubmit,
+            isEditing: isEditing,
+            commentId: isEditing ? commentStore.commentId : null,
         });
+        clearComment();
     };
 
     const onRemove = () => {
@@ -110,9 +139,7 @@ export default function CommentForm({ postId }) {
                     {showEmojiPicker && (
                         <div ref={iconEmojiRef} className='absolute z-10 bottom-12 right-0'>
                             <EmojiPicker
-                                onEmojiClick={(emoji) =>
-                                    setNewComment(newComment + ' ' + emoji.emoji)
-                                }
+                                onEmojiClick={(emoji) => setNewComment(newComment + emoji.emoji)}
                             />
                         </div>
                     )}
@@ -128,16 +155,15 @@ export default function CommentForm({ postId }) {
                             onChange={handleFileChange}
                         />
                     </div>
-                    {newComment ||
-                        (commentImage && (
-                            <button
-                                type='submit'
-                                className='cursor-pointer bg-red-500 rounded-lg px-1.5 py-1 text-white 
+                    {(newComment || commentImage) && (
+                        <button
+                            type='submit'
+                            className='cursor-pointer bg-red-500 rounded-lg px-1.5 py-1 text-white 
                                 flex items-center justify-center'
-                            >
-                                <IoSendOutline className='text-[16px]' />
-                            </button>
-                        ))}
+                        >
+                            <IoSendOutline className='text-[16px]' />
+                        </button>
+                    )}
                 </div>
             </form>
         </>

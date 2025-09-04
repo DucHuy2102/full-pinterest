@@ -11,7 +11,7 @@ const deleteComment = async (id) => {
     return response.data;
 };
 
-export default function MenuOptions({ user, postId, commentId }) {
+export default function MenuOptions({ user, postId, commentId, onClickEdit }) {
     const { user: userStore } = useAuthStore();
     const [isOpenChoice, setIsOpenChoice] = useState(false);
     const [checkUser, setCheckUser] = useState(false);
@@ -36,7 +36,7 @@ export default function MenuOptions({ user, postId, commentId }) {
         if (username === userStore.username) {
             setCheckUser(true);
         }
-        setIsOpenChoice(!isOpenChoice);
+        setIsOpenChoice((prev) => !prev);
     };
 
     const queryClient = useQueryClient();
@@ -68,7 +68,13 @@ export default function MenuOptions({ user, postId, commentId }) {
                         Hide
                     </span>
                     {checkUser && (
-                        <span className='cursor-pointer p-1 hover:bg-yellow-400 hover:text-black w-full h-full text-center'>
+                        <span
+                            onClick={() => {
+                                onClickEdit();
+                                setIsOpenChoice(false);
+                            }}
+                            className='cursor-pointer p-1 hover:bg-yellow-400 hover:text-black w-full h-full text-center'
+                        >
                             Edit
                         </span>
                     )}

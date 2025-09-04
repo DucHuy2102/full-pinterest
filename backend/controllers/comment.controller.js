@@ -38,6 +38,31 @@ export const addComment = async (req, res) => {
     }
 };
 
+export const updateComment = async (req, res) => {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ message: 'Comment ID is required' });
+    const { comment, image, postId } = req.body;
+    if (!postId) return res.status(400).json({ message: 'Post ID is required' });
+    const userId = req.userId;
+    try {
+        const updatedComment = await CommentModel.findByIdAndUpdate(
+            id,
+            {
+                description: comment,
+                image,
+                pin: postId,
+                user: userId,
+            },
+            { new: true }
+        );
+        const user = await UserModel.findById(userId);
+        res.status(201).json({ ...updatedComment.toObject(), user });
+    } catch (error) {
+        console.log('Error in updateComment controller', error);
+        res.status(500).json({ message: 'Error in updateComment controller' });
+    }
+};
+
 export const deleteComment = async (req, res) => {
     const { id } = req.params;
     if (!id) return res.status(400).json({ message: 'Comment ID is required' });
