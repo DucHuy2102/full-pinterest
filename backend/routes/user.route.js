@@ -7,7 +7,9 @@ import {
     signin,
     signout,
     signup,
+    followUser,
 } from '../controllers/user.controller.js';
+import { verifyToken } from '../utils/verifyToken.js';
 
 const router = express.Router();
 
@@ -31,5 +33,7 @@ router.get('/verify-email', verifyEmail);
 
 // get user by username - endpoint: https://localhost:5000/users/:username
 router.get('/:username', getUserByUsername);
+
+router.post('/follow/:username', verifyToken, followUser);
 
 export default router;

@@ -8,10 +8,13 @@ import Collections from '../../components/profile/collections';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useParams } from 'react-router';
+import FollowButton from '../../components/profile/follow-button';
 
 const fetchPinById = async ({ queryKey }) => {
     const [_, username] = queryKey;
-    const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/users/${username}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/users/${username}`, {
+        withCredentials: true,
+    });
     return res.data;
 };
 
@@ -22,6 +25,7 @@ export default function ProfilePage() {
         queryKey: ['profile', username],
         queryFn: fetchPinById,
     });
+    console.log({ data });
 
     if (isPending)
         return (
@@ -36,6 +40,7 @@ export default function ProfilePage() {
             </p>
         );
     if (!data) return <p className='text-center text-xl font-bold text-red-500'>User not found</p>;
+
     return (
         <div
             className='my-5 sm:my-3 mx-5 sm:mx-4 md:mx-3 lg:mx-2 xl:mx-1 2xl:mx-0 
@@ -52,8 +57,9 @@ export default function ProfilePage() {
             <p className='flex flex-col items-center justify-center'>
                 <span className='text-zinc-500 font-semibold'>@{data?.user.username}</span>
                 <span className='text-zinc-800 font-semibold'>
-                    10 followers
-                    <LuDot className='inline' />5 followings
+                    {data?.followersCount} followers
+                    <LuDot className='inline' />
+                    {data?.followingCount} followings
                 </span>
             </p>
             <div className='flex justify-center items-center gap-5'>
@@ -66,12 +72,7 @@ export default function ProfilePage() {
                 >
                     Message
                 </button>
-                <button
-                    className='cursor-pointer bg-red-500 hover:bg-red-600 text-white 
-                font-medium px-4 rounded-3xl py-2'
-                >
-                    Follow
-                </button>
+                <FollowButton isFollowing={data?.isFollowing} username={data?.user.username} />
                 <button className='cursor-pointer p-2.5 rounded-full hover:bg-gray-200'>
                     <HiOutlineDotsHorizontal className='text-xl text-black' />
                 </button>

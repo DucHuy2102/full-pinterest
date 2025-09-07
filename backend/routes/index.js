@@ -15,6 +15,7 @@ export default function SetupRoutes(app) {
     app.use('/pins', pinRouter);
     app.use('/comments', commentRouter);
     app.use('/boards', boardRouter);
+
     app.use('/imagekit/auth', (req, res) => {
         try {
             const result = imagekit.getAuthenticationParameters();

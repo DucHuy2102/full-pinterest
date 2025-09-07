@@ -17,7 +17,6 @@ export default function Comments({ postId }) {
         queryKey: ['comments', postId],
         queryFn: fetchCommentsById,
     });
-    console.log({ data });
     const totalComment = data?.length;
 
     const handleShowAllComments = () => {
